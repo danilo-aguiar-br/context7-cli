@@ -1,0 +1,99 @@
+name: "Bug Report / Relatório de Bug"
+description: "Report a bug in context7-cli / Relate um bug no context7-cli"
+title: "[Bug]: "
+labels: ["bug", "triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Report / Relatório de Bug
+
+        **EN:** Thank you for reporting a bug! Please fill in the details below.
+
+        **PT:** Obrigado por relatar um bug! Preencha os detalhes abaixo.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description / Descrição"
+      description: |
+        EN: A clear description of the bug.
+        PT: Uma descrição clara do bug.
+      placeholder: |
+        EN: When I run `context7 search react`, it returns an error instead of results.
+        PT: Quando executo `context7 search react`, retorna um erro em vez de resultados.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to Reproduce / Passos para Reproduzir"
+      description: |
+        EN: Step-by-step instructions to reproduce the bug.
+        PT: Instruções passo a passo para reproduzir o bug.
+      placeholder: |
+        1. Run / Execute: `context7 search react`
+        2. See error / Veja o erro: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected Behavior / Comportamento Esperado"
+      description: |
+        EN: What you expected to happen.
+        PT: O que você esperava que acontecesse.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: "Actual Behavior / Comportamento Atual"
+      description: |
+        EN: What actually happened. Include error messages.
+        PT: O que realmente aconteceu. Inclua mensagens de erro.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: "context7-cli version / Versão"
+      description: "Run `context7 --version` / Execute `context7 --version`"
+      placeholder: "0.2.3"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: "Operating System / Sistema Operacional"
+      multiple: true
+      options:
+        - Linux (x86_64)
+        - Linux (aarch64)
+        - macOS (Apple Silicon / aarch64)
+        - macOS (Intel / x86_64)
+        - Windows (x86_64)
+    validations:
+      required: true
+
+  - type: input
+    id: rust_version
+    attributes:
+      label: "Rust version / Versão do Rust (optional / opcional)"
+      description: "Run `rustc --version` / Execute `rustc --version`"
+      placeholder: "rustc 1.87.0 (2024-xx-xx)"
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: "Additional Context / Contexto Adicional"
+      description: |
+        EN: Any other relevant information (env vars, config file, logs).
+        PT: Qualquer outra informação relevante (variáveis de ambiente, arquivo de configuração, logs).

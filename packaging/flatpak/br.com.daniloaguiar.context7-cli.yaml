@@ -1,0 +1,29 @@
+app-id: br.com.daniloaguiar.context7-cli
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: context7
+
+finish-args:
+  # Acesso à rede para consultar a API do Context7
+  - --share=network
+
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/context7-cli/cargo
+    RUST_BACKTRACE: '1'
+
+modules:
+  - name: context7-cli
+    buildsystem: simple
+    build-commands:
+      # Compilar em modo release
+      - cargo build --release
+      # Instalar o binário no diretório de destino do Flatpak
+      - install -Dm755 target/release/context7 /app/bin/context7
+    sources:
+      - type: dir
+        path: ../..

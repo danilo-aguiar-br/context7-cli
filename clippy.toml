@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT OR Apache-2.0
+# Clippy configuration for context7-cli.
+# Activates pedantic and nursery lints with sensible allows for a CLI project.
+
+# Allow these pedantic lints in this project.
+avoid-breaking-exported-api = false
+# Cognitive complexity threshold.
+cognitive-complexity-threshold = 30
+# Maximum number of lines for a function.
+too-many-lines-threshold = 200
+# Type complexity threshold.
+type-complexity-threshold = 250
+
+# Disallow these lints completely.
+disallowed-methods = []
+disallowed-types = []

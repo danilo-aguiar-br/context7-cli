@@ -1,0 +1,29 @@
+target/
+logs/
+.env
+*.lock
+!Cargo.lock
+
+# Cobertura LLVM (cargo llvm-cov)
+*.profraw
+*.profdata
+coverage.txt
+
+# Privado — não publicar no GitHub
+.serena/
+CLAUDE.md
+AGENTS.md
+ralph-loop.local.md
+docs_prd/
+docs_rules/
+.claude/
+gaps.md
+graphrag.sqlite
+graphrag.sqlite-shm
+graphrag.sqlite-wal
+.ingest-queue.sqlite
+.ingest-queue.sqlite-shm
+.ingest-queue.sqlite-wal
+.enrich-queue.sqlite
+.enrich-queue.sqlite-shm
+.enrich-queue.sqlite-wal

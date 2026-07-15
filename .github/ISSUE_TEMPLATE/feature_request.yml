@@ -1,0 +1,68 @@
+name: "Feature Request / Solicitação de Funcionalidade"
+description: "Suggest a new feature or improvement / Sugira uma nova funcionalidade ou melhoria"
+title: "[Feature]: "
+labels: ["enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request / Solicitação de Funcionalidade
+
+        **EN:** Have an idea to improve context7-cli? We'd love to hear it!
+
+        **PT:** Tem uma ideia para melhorar o context7-cli? Adoraríamos ouvir!
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Problem / Problema"
+      description: |
+        EN: Is your feature request related to a problem? Describe it.
+        PT: Seu pedido está relacionado a um problema? Descreva-o.
+      placeholder: |
+        EN: I find it frustrating when...
+        PT: Me frustro quando...
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: "Proposed Solution / Solução Proposta"
+      description: |
+        EN: Describe the solution you'd like.
+        PT: Descreva a solução que você gostaria.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternatives Considered / Alternativas Consideradas"
+      description: |
+        EN: Any alternative solutions or features you've considered.
+        PT: Quaisquer soluções ou funcionalidades alternativas que você considerou.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Category / Categoria"
+      options:
+        - "CLI UX / Interface do usuário"
+        - "New command / Novo comando"
+        - "Output format / Formato de saída"
+        - "Performance / Desempenho"
+        - "Configuration / Configuração"
+        - "Cross-platform / Multiplataforma"
+        - "Documentation / Documentação"
+        - "Other / Outro"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: "Additional Context / Contexto Adicional"
+      description: |
+        EN: Any other context, mockups, or examples about the feature request.
+        PT: Qualquer outro contexto, mockups ou exemplos sobre a solicitação.

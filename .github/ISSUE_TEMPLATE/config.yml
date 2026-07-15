@@ -1,0 +1,20 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: "Documentation / Documentação"
+    url: https://docs.rs/context7-cli
+    about: |
+      EN: Read the full API documentation.
+      PT: Leia a documentação completa da API.
+
+  - name: "Usage Guide / Guia de Uso"
+    url: https://github.com/danilo-aguiar-br/context7-cli/blob/main/docs/HOW_TO_USE.md
+    about: |
+      EN: Full usage guide with examples.
+      PT: Guia de uso completo com exemplos.
+
+  - name: "crates.io"
+    url: https://crates.io/crates/context7-cli
+    about: |
+      EN: Install or update context7-cli via Cargo.
+      PT: Instale ou atualize o context7-cli via Cargo.

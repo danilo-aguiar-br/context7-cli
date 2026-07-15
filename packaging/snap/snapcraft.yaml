@@ -1,0 +1,49 @@
+name: context7-cli
+base: core24
+version: '0.5.2'
+summary: Search library docs from your terminal — zero runtime, bilingual EN/PT
+description: |
+  context7-cli é uma ferramenta de linha de comando para pesquisar documentação
+  de qualquer biblioteca diretamente no terminal, usando a API do Context7.
+
+  Suporte bilíngue (EN/PT), rotação de chaves de API, armazenamento persistente
+  e saída colorida com trust score.
+
+  ---
+
+  context7-cli is a command-line tool to search documentation for any library
+  directly from your terminal, using the Context7 API.
+
+  Bilingual support (EN/PT), API key rotation, persistent storage, and colored
+  output with trust scores.
+
+grade: stable
+confinement: strict
+
+architectures:
+  - build-on: amd64
+  - build-on: arm64
+
+apps:
+  context7:
+    command: bin/context7
+    plugs:
+      # Acesso à rede para consultar a API do Context7
+      - network
+      # Leitura do diretório home do usuário para o arquivo de configuração
+      - home
+
+parts:
+  context7-cli:
+    plugin: rust
+    source: .
+    source-type: local
+    rust-channel: stable
+    override-build: |
+      # Garantir UTF-8 no ambiente de build
+      export LANG=en_US.UTF-8
+      export LC_ALL=en_US.UTF-8
+      craftctl default
+    stage-packages:
+      # Dependências de runtime mínimas (libc é necessária para binário glibc)
+      - libc6

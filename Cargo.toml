@@ -1,0 +1,153 @@
+[package]
+name = "context7-cli"
+version = "0.5.2"
+edition = "2021"
+rust-version = "1.75"
+default-run = "context7"
+description = "Search library documentation from your terminal — zero runtime, bilingual (EN/PT), multi-key rotation"
+authors = ["Danilo Aguiar <daniloaguiarbr@proton.me>"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/danilo-aguiar-br/context7-cli"
+homepage = "https://github.com/danilo-aguiar-br/context7-cli"
+documentation = "https://docs.rs/context7-cli"
+readme = "README.md"
+keywords = ["context7", "cli", "documentation", "search", "api-client"]
+categories = ["command-line-utilities", "development-tools"]
+exclude = [
+    ".env",
+    ".serena/",
+    ".claude/",
+    "logs/",
+    "CLAUDE.md",
+    "AGENTS.md",
+    "crates.md",
+    "docs_prd/",
+    "docs_rules/",
+    "como_usa.md",
+    "ralph-loop.local.md",
+    "gaps.md",
+    "graphrag.sqlite",
+    "graphrag.sqlite-shm",
+    "graphrag.sqlite-wal",
+    ".ingest-queue.sqlite-shm",
+    ".ingest-queue.sqlite-wal",
+]
+
+[lib]
+name = "context7_cli"
+path = "src/lib.rs"
+
+[[bin]]
+name = "context7"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+# Pin MSRV-compatible: clap 4.5.33+ puxa clap_lex 1.x (edition2024/Rust 1.85); clap 4.5.32 é a última com clap_lex 0.7.x
+clap = { version = "=4.5.32", features = ["derive", "env", "color"] }
+# Pin à mesma série do clap para garantir compatibilidade; clap_complete 4.5.x tem rust_version=1.74
+clap_complete = "=4.5.46"
+colored = "2"
+fastrand = "2"
+zeroize = { version = "1", features = ["derive"] }
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "http2"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "fs", "signal"] }
+tracing = "0.1"
+tracing-appender = "0.2"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt", "ansi"] }
+directories = "6.0.0"
+# Pin MSRV-compatible: toml 0.9.x+ bumpou rust_version para 1.76; toml 1.x puxa serde_spanned edition2024
+toml = "0.8.23"
+chrono = { version = "0.4.44", features = ["serde"] }
+sys-locale = "0.3"
+unicode-normalization = "0.1"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_System_Console",
+] }
+
+[target.'cfg(target_env = "musl")'.dependencies]
+mimalloc = { version = "0.1", default-features = false }
+
+[dev-dependencies]
+tokio-test = "0.4"
+wiremock = "0.6"
+tempfile = "3"
+serial_test = "3"
+# Pin MSRV-compatible (2.1.3+ migrou para edition2024 requerindo Rust 1.85)
+assert_cmd = "=2.1.2"
+predicates = "3"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
+
+# ─── LINTS CONFIG ─────────────────────────────────────────────────────────────
+# Cargo-level lints that apply across all targets in this crate.
+# Module-level lints (rustdoc, clippy::pedantic) live in `clippy.toml`.
+[lints.rust]
+# `unsafe_code` is required in tests for `std::env::set_var` / `remove_var` (deprecated-safe in Rust 2024).
+# Production code (`src/storage.rs` Windows path) also uses it, gated by `#[cfg(windows)]` with SAFETY comments.
+unsafe_code = "warn"
+unused_must_use = "allow"
+missing_docs = "warn"
+unreachable_pub = "warn"
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+must_use_candidate = "allow"
+return_self_not_must_use = "warn"
+semicolon_if_nothing_returned = "warn"
+# Allow these pedantic lints (too noisy or project-specific)
+similar_names = "allow"
+struct_field_names = "allow"
+too_many_lines = "allow"
+too_many_arguments = "allow"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+# Pedantic lints that don't fit this CLI / FFI project
+cast_possible_truncation = "allow"
+cast_possible_wrap = "allow"
+cast_precision_loss = "allow"
+cast_sign_loss = "allow"
+module_name_repetitions = "allow"
+double_must_use = "allow"
+redundant_closure_for_method_calls = "allow"
+uninlined_format_args = "allow"
+unnested_or_patterns = "allow"
+# Allow some stylistic lints
+needless_pass_by_value = "allow"
+needless_collect = "allow"
+manual_let_else = "allow"
+default_trait_access = "allow"
+# Allow more pedantic lints that are noise for this CLI project
+struct_excessive_bools = "allow"
+doc_markdown = "allow"
+missing_const_for_fn = "allow"
+unused_self = "allow"
+unnecessary_wraps = "allow"
+
+[lints.rustdoc]
+broken_intra_doc_links = "warn"
+private_intra_doc_links = "warn"
+missing_crate_level_docs = "warn"
+
+# ─── MAINTENANCE BADGE ────────────────────────────────────────────────────────
+# Status: actively-maintained. Bump to "experimental" if maintenance slows.
+[badges.maintenance]
+status = "actively-maintained"
+
+
+# Allow must_use to be on type that is already must_use
